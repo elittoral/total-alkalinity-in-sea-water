@@ -2,7 +2,7 @@
 % changelist:
 % 1. removed MaxPts limitation
 % 2. input/output in standard csv format (data separated by comma)
-% 3. uptadated to version from http://cdiac.ornl.gov/oceans/Handbook_2007.html
+% 3. updated http://cdiac.ornl.gov/oceans/Handbook_2007.html
 
 %% init
 % csv: V/cm3, E/V, 

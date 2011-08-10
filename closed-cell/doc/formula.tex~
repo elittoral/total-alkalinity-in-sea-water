@@ -1,0 +1,21 @@
+\documentclass[a4paper,11pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\title{Formula}
+\author{Martin Suszczynski}
+
+\begin{document}
+
+\begin{abstract}
+$ (W0*(x(1)*H).^2 - KW*W0*Z + W0*Z*x(1)*H.*  (   x(2) - x(3)*((x(4)*x(1).*H + 2*x(4)*K2) ./ ((x(1)*H).^2 + x(4)*x(1).*H + x(4)*K2)) ...
+       - BT./ (1 + x(1)*H./KB) - PT*((K1P*K2P*x(1)*H ...
+ + 2*K1P*K2P*K3P - (x(1)*H).^3) ./ ((x(1)*H).^3 + K1P*(x(1)*H).^2 ...
+ + K1P*K2P*x(1)*H + K1P*K2P*K3P)) ...
+      - SiT./(1 + x(1)*H/KSI) ...
+       + ST./(1 + KS*Z./(x(1)*H)) ...
+       + FT./(1 + KF./(x(1)*H))   ))./(KW*Z - (x(1)*H).^2) $
+\end{abstract}
+
+\end{document}

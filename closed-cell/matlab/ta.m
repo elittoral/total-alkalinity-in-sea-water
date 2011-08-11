@@ -1,4 +1,4 @@
-%% closed-cell total alkanity by <https://profiles.google.com/martin.suszczynski Martin Suszczynski>
+%% closed-cell total alkanity
 % (2011) <http://www.elittoral.es elittoral S.L.N.E.> and <http://www.bioges.org Bioges>
 %
 % Matlab version of fortran script writed by Andrew G. Dickson (1994); 
@@ -25,17 +25,15 @@ IN=importdata('dane.in.csv');
 %matrix cheatsheet (columns,rows)  ;)
 meta=IN.data(1,3:9);
 datos=IN.data(:,1:2);
-S=meta(1);PT=1e-6*meta(2);SiT=1e-6*meta(3);T=meta(4);V0=meta(5);C=meta(6);DAcid=meta(7);
+S=meta(1);PT=1e-6*meta(2);SiT=1e-6*meta(3);T=meta(4);V0=meta(5);
+C=meta(6);DAcid=meta(7);
 V=datos(:,1);E=datos(:,2)/1000;NPts=size(datos,1);
 %% CALC
 %MaxPts=100;
 %NPar = 4; LWA = MaxPts*NPar + 5*NPar + MaxPts;
 
-[ KNernst, E0, K2, BT, KB, K1P, K2P, K3P, KSI, ST, KS, Z, FT, KF, W0, W, KW, H ] = SetUp( S, T, V0, DAcid, NPts, V, E, C );
-
-hold on
- plot(W,H,'ro')
-hold off
+[ KNernst, E0, K2, BT, KB, K1P, K2P, K3P, KSI, ST, KS, Z, FT, KF, ...
+    W0, W, KW, H ] = SetUp( S, T, V0, DAcid, NPts, V, E, C );
  
 x0=[1 2e-3 2e-3 1e-6];
 
@@ -45,7 +43,9 @@ x0=[1 2e-3 2e-3 1e-6];
 %x(4)=K1;
 % M = @(x,xdata)x(1)*exp(-x(2)*xdata) + x(3)*exp(-x(4)*xdata);
 
-M = @(x,H)(W0*(x(1)*H).^2 - KW*W0*Z + W0*Z*x(1)*H.*  (   x(2) - x(3)*((x(4)*x(1).*H + 2*x(4)*K2) ./ ((x(1)*H).^2 + x(4)*x(1).*H + x(4)*K2)) ...
+M = @(x,H)(W0*(x(1)*H).^2 - KW*W0*Z + W0*Z*x(1)*H.*  ( x(2) - ...
+x(3)*((x(4)*x(1).*H + 2*x(4)*K2) ./ ...
+((x(1)*H).^2 + x(4)*x(1).*H + x(4)*K2)) ...
        - BT./ (1 + x(1)*H./KB) - PT*((K1P*K2P*x(1)*H ...
  + 2*K1P*K2P*K3P - (x(1)*H).^3) ./ ((x(1)*H).^3 + K1P*(x(1)*H).^2 ...
  + K1P*K2P*x(1)*H + K1P*K2P*K3P)) ...
@@ -65,6 +65,8 @@ M = @(x,H)(W0*(x(1)*H).^2 - KW*W0*Z + W0*Z*x(1)*H.*  (   x(2) - x(3)*((x(4)*x(1)
 [x,resnorm,residual,exitflag,output,lambda,jacobian] = ...
     lsqcurvefit(M,x0,H,W,[],[],optimset('Algorithm','levenberg-marquardt'))
 
+
+ plot(W,H,'ro')
  hold on
  plot(M(x,H),H)
  hold off

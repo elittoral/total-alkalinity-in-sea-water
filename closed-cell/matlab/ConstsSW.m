@@ -3,6 +3,7 @@ function [ K1, K2, KB, K1P, K2P, K3P, KSI, KS, KF, KW ] = ConstsSW( S, T )
 TK = 273.15 + T;
     IS = 19.924*S/(1000 - 1.005*S);
 
+    % Roy et al. (1993) Mar. Chem. 44, 249
     K1 = exp ( -2307.1266/TK + 2.83655 - 1.5529413*log(TK) ...
    +    (-4.0484/TK - 0.20760841)*sqrt(S) + 0.08468345*S ...
    -   0.00654208*S^1.5 + log(1 - 0.001005*S)    );
@@ -11,11 +12,13 @@ TK = 273.15 + T;
    +    (-23.9722/TK - 0.106901773)*sqrt(S) + 0.1130822*S - 0.00846934*S^1.5 ... 
    + log(1 - 0.001005*S) );
 
+    % Dickson (1990) Deep-Sea Res. 37, 755
     KB = exp (  (-8966.90 - 2890.53*sqrt(S) - 77.942*S + 1.728*S^1.5 -0.0996*S^2)/TK ... 
     + (148.0248 + 137.1942*sqrt(S) + 1.62142*S) ...
    +   (-24.4344 - 25.085*sqrt(S) -0.2474*S)*log(TK) ...
    +    0.053105*sqrt(S)*TK     );
 
+    % Millero (1995) -- composite data (Geochim. Cosmochim Acta 59, 661)
     K1P = exp (   -4576.752/TK + 115.525 - 18.453*log(TK) ...
    +    (-106.736/TK + 0.69171)*sqrt(S) + (-0.65643/TK - 0.01844)*S     );
 
@@ -35,11 +38,14 @@ TK = 273.15 + T;
     KW = exp (  -13847.26/TK + 148.9652 - 23.6521*log(TK) ...
    +    (118.67/TK - 5.977 + 1.0495*log(TK))*sqrt(S) - 0.01615*S );
 
+    % Dickson (1990) -- free hydrogen ion scale (J. Chem. Thermodynamics
+    % 22, 113)
     KS = exp ( -4276.1/TK + 141.328 - 23.093*log(TK) ...
    +    (-13856/TK + 324.57 - 47.986*log(TK)) * sqrt(IS) ...
    +    (35474/TK - 771.54 + 114.723*log(TK)) * IS ...
    -     2698*IS^1.5/TK + 1776*IS^2/TK + log(1 - 0.001005*S)  );
 
+    % Dickson & Riley (1979) -- change pH scale to total (Mar. Chem. 7, 89)
       KF = 1590.2/TK - 12.641 + 1.525 * sqrt(IS) + log(1 - 0.001005*S) ;
       KF = KF + log(1 + (0.1400/96.062)*(S/1.80655)/KS);
       KF = exp(KF);

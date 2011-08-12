@@ -33,7 +33,7 @@ V=datos(:,1);E=datos(:,2)/1000;NPts=size(datos,1);
 %NPar = 4; LWA = MaxPts*NPar + 5*NPar + MaxPts;
 
 [ KNernst, E0, K2, BT, KB, K1P, K2P, K3P, KSI, ST, KS, Z, FT, KF, ...
-    W0, W, KW, H ] = SetUp( S, T, V0, DAcid, NPts, V, E, C );
+    W0, W, KW, H, AT ] = SetUp( S, T, V0, DAcid, NPts, V, E, C );
  
 x0=[1 2e-3 2e-3 1e-6];
 
